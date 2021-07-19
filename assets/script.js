@@ -46,14 +46,14 @@ function updateTask(selectStart, selectEnd) {
     };
 };
 
-function update_timeblock_func() {
-    var this_moment = parseInt(moment().format('H'));
+function updateTimeBlock() {
+    var currentTime = parseInt(moment().format('H'));
     var classy = ""; 
 
     for (var i = selectStart; i < selectEnd; i++) {
-        if (i < this_moment) {
+        if (i < currentTime) {
             classy = "past";
-        } else if (i == this_moment) {
+        } else if (i == currentTime) {
             classy = "present";
         } else {
             classy = "future";
@@ -82,7 +82,7 @@ var update_time = setInterval(function () {
     // update the time-block colors every hour
     if (moment().format("mm:ss") == "00:00") {
         console.log("updating timeblocks");
-        update_timeblock_func(selectStart, selectEnd);
+        updateTimeBlock(selectStart, selectEnd);
         updatePresent();
     }
     //updates the bar every 30 seconds
@@ -101,7 +101,7 @@ var schedule = {};
 
 updateTask(selectStart, selectEnd);
 createTimeBlock(selectStart, selectEnd);
-update_timeblock_func(selectStart, selectEnd);
+updateTimeBlock(selectStart, selectEnd);
 updatePresent();
 
 // saveBtn on click
